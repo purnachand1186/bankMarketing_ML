@@ -1,46 +1,8 @@
-# Bank-Marketing-Project
-# Bank Marketing Dataset
+# Bank-Marketing-Practical-Application
+## Dataset
+The data is related with direct marketing campaigns (phone calls) of a Portuguese banking institution. The classification goal is to predict if the client will subscribe a term deposit (variable y).
 
-## Marketing Introduction:
-The process by which companies create value for customers and build strong customer relationships in order to capture value from customers in return. - Kotler and Armstrong (2010).
-
-Marketing campaigns are characterized by focusing on the customer needs and their overall satisfaction. Nevertheless, there are different variables that determine whether a marketing campaign will be successful or not. There are certain variables that we need to take into consideration when making a marketing campaign.
-
-## The 4 Ps:
-
-1) Segment of the Population: To which segment of the population is the marketing campaign going to address and why? This aspect of the marketing campaign is extremely important since it will tell to which part of the population should most likely receive the message of the marketing campaign.
-
-2) Distribution channel to reach the customer's place: Implementing the most effective strategy in order to get the most out of this marketing campaign. What segment of the population should we address? Which instrument should we use to get our message out? (Ex: Telephones, Radio, TV, Social Media Etc.)
-
-3) Price: What is the best price to offer to potential clients? (In the case of the bank's marketing campaign this is not necessary since the main interest for the bank is for potential clients to open depost accounts in order to make the operative activities of the bank to keep on running.)
-
-4) Promotional Strategy: This is the way the strategy is going to be implemented and how are potential clients going to be address. This should be the last part of the marketing campaign analysis since there has to be an indepth analysis of previous campaigns (If possible) in order to learn from previous mistakes and to determine how to make the marketing campaign much more effective.
-
-## What is a Term Deposit?
-
-A Term deposit is a deposit that a bank or a financial institurion offers with a fixed rate (often better than just opening deposit account) in which your money will be returned back at a specific maturity time. For more information with regards to Term Deposits please click on this link from Investopedia: https://www.investopedia.com/terms/t/termdeposit.asp
-
-## Outline:
-
-1. Import data from dataset and perform initial high-level analysis: look at the number of rows, look at the missing values, look at dataset columns and their values respective to the campaign outcome.
-2. Clean the data: remove irrelevant columns, deal with missing and incorrect values, turn categorical columns into dummy variables.
-3. Use machine learning techniques to predict the marketing campaign outcome and to find out factors, which affect the success of the campaign. 
-
-## Dataset Link   
-https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
-
-## Dataset Information  
-
-The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be ('yes') or not ('no') subscribed.
-
-There are four datasets:
-1) bank-additional-full.csv with all examples (41188) and 20 inputs, ordered by date (from May 2008 to November 2010), very close to the data analyzed in [Moro et al., 2014]
-2) bank-additional.csv with 10% of the examples (4119), randomly selected from 1), and 20 inputs.
-3) bank-full.csv with all examples and 17 inputs, ordered by date (older version of this dataset with less inputs).
-4) bank.csv with 10% of the examples and 17 inputs, randomly selected from 3 (older version of this dataset with less inputs).
-The smallest datasets are provided to test more computationally demanding machine learning algorithms (e.g., SVM).
-
-The classification goal is to predict if the client will subscribe (yes/no) a term deposit (variable y).  
+https://archive.ics.uci.edu/dataset/222/bank+marketing
 
 ## Attribute Information  
 
@@ -73,12 +35,41 @@ Input variables:
 Output variable (desired target):  
 21-y - has the client subscribed a term deposit? (binary: 'yes','no')
 
+## Process Followed:
 
+1. Import 'bank-additional-full.csv' from the data folder
+2. Understand data by exploring data through diagrams
+   Observations:
+     1. The data provided has unbalanced data in the target column 'Y'
+     ![image](https://github.com/user-attachments/assets/b770b73c-79ad-4888-9fc3-93d086e5d580)
+     2. Outliers exists in 'Duration' & 'Compaign' Columns, cleanup data using IQR.
+       
+        ![image](https://github.com/user-attachments/assets/883dc91e-4491-44e9-8f2b-f5975d3f132f)
+       
+        ![image](https://github.com/user-attachments/assets/23806de3-a302-4734-b828-fb0587a70100)
 
+3. perform data engineering on Category columns using LabelEncode, after encoding the a correlational map/diagram shows the relationship among the features
+        
+   ![image](https://github.com/user-attachments/assets/0b6a20a5-214f-4be9-8108-3d3c9fb4e43a)
 
-## License 
-This dataset is public available for research.  
-Citations -  
-1.Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014  
-2.Dua, D. and Graff, C. (2019). UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California, School of Information and Computer Science. 
+4. Using Random Forest Regression, found our the importance of features in the data set
+        
+   ![image](https://github.com/user-attachments/assets/74cde816-a337-4fdd-ba4d-b83b6c85da72)
+
+5.  Used KNN, Decision Trees, SVM, Logistric regression models with default parameters, and the performance of these models are mesaured as below
+        
+   ![image](https://github.com/user-attachments/assets/fe5ad27e-9f5a-4784-877b-91da88dcfffd)
+
+6.  Finally Using Grid Search CV, passed multiple parameters for the above mentioned models and found out best scores with best parameters
+        
+    ![image](https://github.com/user-attachments/assets/4523f352-cf80-4d95-84c4-ceab7d54b7ed)
+   
+    ![image](https://github.com/user-attachments/assets/847fb09c-ddc7-4121-af1f-839c1ba02069)
+         
+## Observations: 
+
+1. SVM Model always takes more time to fit the data, but in most cases the accraucy scores are better
+2. Decision Tree Classicification Model took less time than SVM but returned second or third best scores
+3. KNN & Logistric regressions does returned good scores but in my observation, but they are the least preffered choices for my future analysis.
+4. People with University Degree, has a home loan tend to sunscribe to Bank marketing campaigns.
 
